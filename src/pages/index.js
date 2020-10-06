@@ -1,19 +1,50 @@
 import React from "react";
 // import { Link } from "gatsby"
+import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import Hero from '../components/Hero';
 import About from '../components/About';
-
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-      <Hero />
-      <About />
+import Projects from '../components/Projects';
+import Slider from '../components/Slider';
 
 
-  
-  </Layout>
-)
+
+const IndexPage = ({data}) => {
+  const{allAirtable: {nodes:projects}} = data;
+  return (
+      <Layout>
+        <SEO title="Home" />
+        <Hero />
+        <About />
+        <Projects projects={projects} title="Latest Projects" />
+        <Slider  />
+      </Layout>
+  )
+}
+
+export const query = graphql`
+  {
+    allAirtable(filter: {table: {eq: "Projects"}}, limit: 3, sort: {fields: data___date, order: DESC}) {
+      nodes {
+        id
+        data {
+          date
+          image {
+            localFiles {
+              childImageSharp {
+                fluid {
+                  src
+                }
+              }
+            }
+          }
+          name
+          type
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage;

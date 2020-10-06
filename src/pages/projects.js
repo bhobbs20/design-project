@@ -1,12 +1,22 @@
-import React from 'react';
+import React from "react";
+// import { graphql } from "gatsby"
+import styled from "styled-components";
+// import { Layout, Projects, Algolia } from "../components"
 
-
-const Projects = () => {
-    return(
-        <div>
-            projects
-        </div>
-    )
+const ProjectsPage = () => {
+  return (
+      <Wrapper className="section">
+        <h1>Projects</h1>
+      </Wrapper>
+  )
 }
 
-export default Projects;
+const Wrapper = styled.main`
+  min-height: 100vh;
+  background: var(--clr-grey-10);
+  nav {
+    background: var(--clr-primary-7);
+  }
+`
+
+export default ProjectsPage;
