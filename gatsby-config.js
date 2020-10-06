@@ -30,9 +30,24 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/gatsby-icon.png`, 
       },
     },
+    {
+      resolve: `gatsby-source-airtable`,
+      options: {
+        apiKey: process.env.GATSBY_AIRTABLE_API, 
+        concurrency: 5, 
+        tables: [
+          {
+            baseId: process.env.GATSBY_AIRTABLE_BASE_ID,
+            tableName: `Projects`,
+            mapping: { image:`fileNode` }, 
+          },
+    
+        ]
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
