@@ -15,7 +15,7 @@ const query = graphql`
   }
 `
 
-const HeroBackground = ({children}) => {
+const HeroBackground = ({children, image}) => {
     const {
         file: {
             childImageSharp: { fluid }
@@ -23,7 +23,7 @@ const HeroBackground = ({children}) => {
     } = useStaticQuery(query)
     return(
         <Wrapper>
-            <BackgroundImage Tag="div" fluid={fluid} className="bcg" preserveStackingContext={true}>
+            <BackgroundImage Tag="div" fluid={image || fluid} className="bcg" preserveStackingContext={true}>
                 {children}
             </BackgroundImage>
         </Wrapper>

@@ -15,7 +15,7 @@ const IndexPage = ({data}) => {
   return (
       <Layout>
         <SEO title="Home" />
-        <Hero />
+        <Hero  projects={projects} />
         <About />
         <Projects projects={projects} title="Latest Projects" />
         <Slider  />
@@ -25,22 +25,26 @@ const IndexPage = ({data}) => {
 
 export const query = graphql`
   {
-    allAirtable(filter: {table: {eq: "Projects"}}, limit: 3, sort: {fields: data___date, order: DESC}) {
+    allAirtable(
+      filter: { table: { eq: "Projects" } }
+      limit: 3
+      sort: { fields: data___date, order: DESC }
+    ) {
       nodes {
         id
         data {
           date
+          name
+          type
           image {
             localFiles {
               childImageSharp {
                 fluid {
-                  src
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
           }
-          name
-          type
         }
       }
     }
