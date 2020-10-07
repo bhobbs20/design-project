@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import styled from "styled-components";
 import HeroBackground from "./Background";
 
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi"
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 
 const Hero = ({ projects }) => {
   const images = projects.map(item => {
@@ -16,6 +16,7 @@ const Hero = ({ projects }) => {
     return image
   })
   const [index, setIndex] = React.useState(0)
+  
   React.useEffect(() => {
     const lastIndex = images.length - 1
     if (index < 0) {
@@ -25,36 +26,35 @@ const Hero = ({ projects }) => {
       setIndex(0)
     }
   }, [index, images])
-    return(
-        <Wrapper>
+  return (
+    <Wrapper>
+      <HeroBackground image={images[index]}>
+        <article>
+          <h3>If you can dream it, we can create it</h3>
+          <h1>let your home be inique and stylish</h1>
+          <Link to="/projects">Projects</Link>
+        </article>
 
-            <HeroBackground image={images[index]}>
-            <article>
-            <h3>If you can dream it, we can create it</h3>
-            <h1>let your home be inique and stylish</h1>
-            <Link to="/projects">Projects</Link>
-          </article>
-  
-          <button className="prev-btn" onClick={() => setIndex(index - 1)}>
-            <FiChevronLeft />
-          </button>
-          <button className="next-btn" onClick={() => setIndex(index + 1)}>
-            <FiChevronRight />
-          </button>
-          <div className="dots">
-            {images.map((_, btnIndex) => {
-              return (
-                <span
-                  key={btnIndex}
-                  onClick={() => setIndex(btnIndex)}
-                  className={index === btnIndex ? "active" : undefined}
-                ></span>
-              )
-            })}
-          </div>
-            </HeroBackground>
-        </Wrapper>
-    )
+        <button className="prev-btn" onClick={() => setIndex(index - 1)}>
+          <FiChevronLeft />
+        </button>
+        <button className="next-btn" onClick={() => setIndex(index + 1)}>
+          <FiChevronRight />
+        </button>
+        <div className="dots">
+          {images.map((_, btnIndex) => {
+            return (
+              <span
+                key={btnIndex}
+                onClick={() => setIndex(btnIndex)}
+                className={index === btnIndex ? "active" : undefined}
+              ></span>
+            )
+          })}
+        </div>
+      </HeroBackground>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`
@@ -164,4 +164,4 @@ const Wrapper = styled.section`
   }
 `
 
-export default Hero;
+export default Hero

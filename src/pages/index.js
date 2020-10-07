@@ -7,6 +7,7 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Projects from '../components/Projects';
 import Slider from '../components/Slider';
+import Survery from "../components/Survey";
 
 
 
@@ -18,6 +19,7 @@ const IndexPage = ({data}) => {
         <Hero  projects={projects} />
         <About />
         <Projects projects={projects} title="Latest Projects" />
+        <Survery />
         <Slider  />
       </Layout>
   )
