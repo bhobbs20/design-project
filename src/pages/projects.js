@@ -1,13 +1,20 @@
 import React from "react";
-// import { graphql } from "gatsby"
+import { graphql } from "gatsby"
 import styled from "styled-components";
-// import { Layout, Projects, Algolia } from "../components"
+import Layout from '../components/Layout';
+import Projects from '../components/Projects';
 
-const ProjectsPage = () => {
-  return (
-      <Wrapper className="section">
-        <h1>Projects</h1>
-      </Wrapper>
+const ProjectsPage = ({data}) => {
+    const {
+        allAirtable: { nodes: projects },
+    } = data
+    
+    return (
+      <Wrapper>
+          <Layout>
+            <Projects title="our projects" projects={projects} page />
+          </Layout>
+    </Wrapper>
   )
 }
 
@@ -16,6 +23,30 @@ const Wrapper = styled.main`
   background: var(--clr-grey-10);
   nav {
     background: var(--clr-primary-7);
+  }
+`
+
+export const query = graphql`
+  {
+    allAirtable(filter: { table: { eq: "Projects" } }) {
+      nodes {
+        id
+        data {
+          date
+          name
+          type
+          image {
+            localFiles {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `
 
