@@ -1,23 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import React, { useContext } from "react"
+import Navbar from "./Navbar"
+import Footer from "./Footer"
+import Sidebar from "./Sidebar"
+import { GatsbyContext } from "../context/context"
 
 const Layout = ({ children }) => {
-
+  const { isSidebarOpen } = useContext(GatsbyContext)
 
   return (
     <>
-     
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <Navbar />
+      {isSidebarOpen && <Sidebar />}
+      {children}
+      <Footer />
     </>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout

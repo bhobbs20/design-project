@@ -1,7 +1,8 @@
-import React from 'react';
-import { createGlobalStyle} from 'styled-components';
+import React from "react"
+import { createGlobalStyle } from "styled-components"
+import { GatsbyProvider } from "./src/context/context"
 
-const GlobalStyle = createGlobalStyle `
+const GlobalStyle = createGlobalStyle`
     /*
 ===============
 Variables
@@ -174,10 +175,10 @@ p {
 `
 
 export const wrapRootElement = ({ element }) => {
-    return(
-        <>
-            <GlobalStyle />
-            {element}
-            </>
-    )
+  return (
+    <>
+      <GlobalStyle />
+      <GatsbyProvider>{element}</GatsbyProvider>
+    </>
+  )
 }
